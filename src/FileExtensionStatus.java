@@ -26,11 +26,19 @@ public class FileExtensionStatus {
     private FileType fileTypeFromFile;
 
     public enum FileType {
-        JPG,
-        TXT,
-        GIF,
-        UNDEFINED,
-        NOT_INITIATED
+        JPG("jpg"),
+        TXT("txt"),
+        GIF("gif"),
+        UNDEFINED("undefined"),
+        NOT_INITIATED("not initiated");
+        String fileTypeString;
+        private FileType(String fileTypeString){
+            this.fileTypeString = fileTypeString;
+        }
+        @Override
+        public String toString(){
+            return fileTypeString;
+        }
     }
 
     @Override
@@ -45,13 +53,5 @@ public class FileExtensionStatus {
     @Override
     public int hashCode() {
         return Objects.hash(fileTypeFromPath, fileTypeFromFile);
-    }
-
-    @Override
-    public String toString() {
-        return "FileExtensionStatus{" +
-                "fileTypeFromPath=" + fileTypeFromPath +
-                ", fileTypeFromFile=" + fileTypeFromFile +
-                '}';
     }
 }

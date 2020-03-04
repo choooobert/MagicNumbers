@@ -1,6 +1,6 @@
 import java.io.*;
 import java.util.Arrays;
-
+import java.util.Formatter;
 
 
 public class FileExtensionAnalyzer {
@@ -22,7 +22,7 @@ public class FileExtensionAnalyzer {
 
     private void determineFileTypeFromPath(){
         int dotIndex = pathToFile.indexOf('.');
-        String fileExtensionFromPath = pathToFile.substring(dotIndex);
+        String fileExtensionFromPath = pathToFile.substring(dotIndex+1);
         if(fileExtensionFromPath.equals("txt")){
             fileExtensionStatus.setFileTypeFromPath(FileExtensionStatus.FileType.TXT);
             return;
@@ -48,13 +48,27 @@ public class FileExtensionAnalyzer {
     }
 
     private void determineFileTypeFromFile(){
-        if (Arrays.equals(Arrays.copyOfRange(firstBytesOfFile,0,2), JPG_EXTENSION)){
+        if (Arrays.equals(Arrays.copyOfRange(firstBytesOfFile,0,3), JPG_EXTENSION)){
             fileExtensionStatus.setFileTypeFromFile(FileExtensionStatus.FileType.JPG);
-        } else if(Arrays.equals(Arrays.copyOfRange(firstBytesOfFile,0,5), GIF_EXTENSION_1)
-              || Arrays.equals(Arrays.copyOfRange(firstBytesOfFile,0,5), GIF_EXTENSION_2)){
+            return;
+        } else if(Arrays.equals(Arrays.copyOfRange(firstBytesOfFile,0,6), GIF_EXTENSION_1)
+              || Arrays.equals(Arrays.copyOfRange(firstBytesOfFile,0,6), GIF_EXTENSION_2)){
             fileExtensionStatus.setFileTypeFromFile(FileExtensionStatus.FileType.GIF);
+            return;
         } else {
-            fileExtensionStatus.setFileTypeFromFile(FileExtensionStatus.FileType.UNDEFINED);
+            for(byte b : firstBytesOfFile){
+                //txt files do not have magic number. In this case we check if the bytes are readable characters.
+                if (b<32 || b>127) {
+                    fileExtensionStatus.setFileTypeFromFile(FileExtensionStatus.FileType.UNDEFINED);
+                    return;
+                }
+                else{
+                    fileExtensionStatus.setFileTypeFromFile(FileExtensionStatus.FileType.TXT);
+                    return;
+                }
+            }
+
+
         }
     }
 
@@ -68,10 +82,16 @@ public class FileExtensionAnalyzer {
         }
     }
 
-    public FileExtensionStatus getFileExtensionStatus() {
+    public FileExtensionStatus.FileType getFileType() throws Exception {
         if(fileExtensionStatus.getFileTypeFromFile()==FileExtensionStatus.FileType.NOT_INITIATED
         ||fileExtensionStatus.getFileTypeFromPath()==FileExtensionStatus.FileType.NOT_INITIATED)
-            throw new RuntimeException("NotInitializedException: cannto run this function when fileExtensionStatus was not read");
-        return fileExtensionStatus;
+            throw new Exception("NotInitializedException: cannot run this function when fileExtensionStatus was not read");
+
+        if(fileExtensionStatus.getFileTypeFromFile() != fileExtensionStatus.getFileTypeFromPath())
+            throw new Exception("The file extension and inner structer of file do not correspond\n TypeFromFileStructure : "
+                                + fileExtensionStatus.getFileTypeFromFile().toString() +
+                                "\n  Type from path : " + fileExtensionStatus.getFileTypeFromPath().toString());
+
+        return fileExtensionStatus.getFileTypeFromFile();
     }
 }
