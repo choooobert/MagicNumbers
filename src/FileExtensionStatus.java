@@ -1,5 +1,3 @@
-import java.util.Objects;
-
 public class FileExtensionStatus {
     public FileExtensionStatus() {
         this.fileTypeFromFile=FileType.NOT_INITIATED;

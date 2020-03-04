@@ -1,6 +1,5 @@
 import java.io.*;
 import java.util.Arrays;
-import java.util.Formatter;
 
 
 public class FileExtensionAnalyzer {
@@ -47,7 +46,11 @@ public class FileExtensionAnalyzer {
         }
     }
 
-    private void determineFileTypeFromFile(){
+    private void determineFileTypeFromFile() throws Exception{
+        if(firstBytesOfFile ==  null){
+            throw new Exception("Data was not read form file");
+        }
+
         if (Arrays.equals(Arrays.copyOfRange(firstBytesOfFile,0,3), JPG_EXTENSION)){
             fileExtensionStatus.setFileTypeFromFile(FileExtensionStatus.FileType.JPG);
             return;
@@ -68,8 +71,6 @@ public class FileExtensionAnalyzer {
                     return;
                 }
             }
-
-
         }
     }
 
@@ -78,7 +79,7 @@ public class FileExtensionAnalyzer {
             determineFileTypeFromPath();
             readBytesFromFile();
             determineFileTypeFromFile();
-        }catch (IOException e){
+        }catch (Exception e){
             e.printStackTrace();
         }
     }
