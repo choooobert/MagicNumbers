@@ -58,7 +58,8 @@ public class FileExtensionAnalyzer {
         } else {
             for(byte b : firstBytesOfFile){
                 //txt files do not have magic number. In this case we check if the bytes are readable characters.
-                if (b<32 || b>127) {
+                // in ASCII code readable sings are stored on bytes between 31 and 127
+                if (b<32 || b>126) {
                     fileExtensionStatus.setFileTypeFromFile(FileExtensionStatus.FileType.UNDEFINED);
                     return;
                 }
@@ -88,7 +89,7 @@ public class FileExtensionAnalyzer {
             throw new Exception("NotInitializedException: cannot run this function when fileExtensionStatus was not read");
 
         if(fileExtensionStatus.getFileTypeFromFile() != fileExtensionStatus.getFileTypeFromPath())
-            throw new Exception("The file extension and inner structer of file do not correspond\n TypeFromFileStructure : "
+            throw new Exception("The file extension and inner structure of file do not correspond\n type from file structure : "
                                 + fileExtensionStatus.getFileTypeFromFile().toString() +
                                 "\n  Type from path : " + fileExtensionStatus.getFileTypeFromPath().toString());
 

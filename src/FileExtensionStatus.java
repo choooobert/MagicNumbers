@@ -40,18 +40,4 @@ public class FileExtensionStatus {
             return fileTypeString;
         }
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        FileExtensionStatus that = (FileExtensionStatus) o;
-        return fileTypeFromPath == that.fileTypeFromPath &&
-                fileTypeFromFile == that.fileTypeFromFile;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(fileTypeFromPath, fileTypeFromFile);
-    }
 }
