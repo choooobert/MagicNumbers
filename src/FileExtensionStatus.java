@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class FileExtensionStatus {
     public FileExtensionStatus() {
         this.fileTypeFromFile=FileType.NOT_INITIATED;
@@ -31,5 +33,25 @@ public class FileExtensionStatus {
         NOT_INITIATED
     }
 
-    
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        FileExtensionStatus that = (FileExtensionStatus) o;
+        return fileTypeFromPath == that.fileTypeFromPath &&
+                fileTypeFromFile == that.fileTypeFromFile;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(fileTypeFromPath, fileTypeFromFile);
+    }
+
+    @Override
+    public String toString() {
+        return "FileExtensionStatus{" +
+                "fileTypeFromPath=" + fileTypeFromPath +
+                ", fileTypeFromFile=" + fileTypeFromFile +
+                '}';
+    }
 }

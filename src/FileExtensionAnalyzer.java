@@ -1,6 +1,8 @@
 import java.io.*;
 import java.util.Arrays;
 
+
+
 public class FileExtensionAnalyzer {
     private byte[] GIF_EXTENSION_1 = "GIF87a".getBytes();
     private byte[] GIF_EXTENSION_2 = "GIF89a".getBytes();
@@ -56,4 +58,20 @@ public class FileExtensionAnalyzer {
         }
     }
 
+    public void readExtensions(){
+        try {
+            determineFileTypeFromPath();
+            readBytesFromFile();
+            determineFileTypeFromFile();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    public FileExtensionStatus getFileExtensionStatus() {
+        if(fileExtensionStatus.getFileTypeFromFile()==FileExtensionStatus.FileType.NOT_INITIATED
+        ||fileExtensionStatus.getFileTypeFromPath()==FileExtensionStatus.FileType.NOT_INITIATED)
+            throw new RuntimeException("NotInitializedException: cannto run this function when fileExtensionStatus was not read");
+        return fileExtensionStatus;
+    }
 }
