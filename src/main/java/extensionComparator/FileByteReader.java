@@ -10,7 +10,7 @@ abstract class FileByteReader {
     public FileByteReader(String pathToFile) {
         this.pathToFile = pathToFile;
     }
-    protected String getPathToFile(){
+    public String getPathToFile(){
         return pathToFile;
     }
     protected byte[] readBytesFromFile(int numberOfBytes) throws IOException {

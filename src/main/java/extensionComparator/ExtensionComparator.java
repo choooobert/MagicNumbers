@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class Main {
+public class ExtensionComparator {
 
     public static void main(String[] args) {
 		try {
@@ -24,7 +24,7 @@ public class Main {
 
 			fileExtensionAnalyzer.addExtension(new Extension("txt", new ArrayList<>()));
 			String fileExtension = fileExtensionAnalyzer.getFileExtensionStatus().getExtensionString();
-			System.out.println(new StringBuilder("path to file : ").append(filePath).append(" file extension : ").append(fileExtension).toString());
+			System.out.println(new StringBuilder("path to file : ").append(fileExtensionAnalyzer.getPathToFile()).append(" file extension : ").append(fileExtension).toString());
 		}
 		catch(Exception e){
 			e.printStackTrace();
