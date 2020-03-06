@@ -14,6 +14,7 @@ public class FileExtensionAnalyzer extends FileByteReader{
         this.extensions = new ArrayList<>();
     }
 
+    @Override
     public void addExtension(StringAndBytesArrayComparable extension){
         extensions.add(extension);
     }
@@ -37,6 +38,7 @@ public class FileExtensionAnalyzer extends FileByteReader{
         else return extension.toString();
     }
 
+    @Override
     public FileExtensionStatus getFileExtensionStatus(){
         try {
             return new FileExtensionStatus(getFileTypeFromPath(), getFileTypeFromFile());

@@ -12,7 +12,7 @@ public class ExtensionComparator {
 			Scanner scanner = new Scanner(System.in);
 			String filePath = scanner.nextLine();
 
-			FileExtensionAnalyzer fileExtensionAnalyzer = new FileExtensionAnalyzer(filePath, 10);
+			FileExtensionAnalyzerIf fileExtensionAnalyzer = new FileExtensionAnalyzer(filePath, 10);
 			fileExtensionAnalyzer.addExtension(new Extension("gif",
 					Arrays.asList("GIF87a".getBytes(), "GIF89a".getBytes())));
 
