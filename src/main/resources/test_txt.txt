@@ -1,0 +1,7 @@
+set terminal postscript eps enhanced colour
+set output "pedy2De.eps"
+set autoscale
+set font "Times, 18"
+set xlabel "t [s]"
+set ylabel "p_{r}"
+plot 'pedy1.dat' u 1:2 title "e=1" w lines lw 3, 'pedy3.dat' u 1:2 title "e=3" w lines lw 3, 'pedy5.dat' u 1:2 title "e=5" w lines lw 3 
