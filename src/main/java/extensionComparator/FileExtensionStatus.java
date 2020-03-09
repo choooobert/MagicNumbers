@@ -14,7 +14,7 @@ public class FileExtensionStatus {
         this.extensionFromPath="undefined";
     }
 
-    private boolean extensionFromFileEqualsextensionFromPath(){
+    private boolean extensionFromFileEqualsExtensionFromPath(){
         return extensionFromFile == extensionFromPath;
     }
 

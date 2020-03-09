@@ -29,12 +29,11 @@ public class FileExtensionAnalyzer extends FileByteReader{
 
     private String getFileTypeFromFile() throws Exception{
         firstBytesOfFile = readBytesFromFile(numberOfBytes);
-        if(firstBytesOfFile ==  null){
-            throw new Exception("Data was not read from file");
+        if(firstBytesOfFile.length == 0){
+            return "empty file";
         }
-        firstBytesOfFile = readBytesFromFile(numberOfBytes);
-        StringAndBytesArrayComparable extension =extensions.stream().filter(g->g.equalsFileExtension(firstBytesOfFile)).findFirst().orElse(null);
-        if(extension==null) return "undefined";
+        StringAndBytesArrayComparable extension = extensions.stream().filter(g->g.equalsFileExtension(firstBytesOfFile)).findFirst().orElse(null);
+        if(extension == null) return "undefined";
         else return extension.toString();
     }
 
@@ -44,7 +43,7 @@ public class FileExtensionAnalyzer extends FileByteReader{
             return new FileExtensionStatus(getFileTypeFromPath(), getFileTypeFromFile());
         }
         catch(Exception e){
-            System.out.println("Error occured when reading file " + getPathToFile());
+            System.err.println("Error occurred when reading file " + getPathToFile());
             e.printStackTrace();
             return new FileExtensionStatus();
         }
