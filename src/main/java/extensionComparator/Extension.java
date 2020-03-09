@@ -20,8 +20,10 @@ public class Extension implements  StringAndBytesArrayComparable<byte[]> {
     @Override
     public boolean equalsFileExtension(byte[] firstBytesOfFile) {
         if(pathExtension.equals("txt")){
+            System.out.println("I'm in equalsFileExtension");
             for(byte t : firstBytesOfFile){
-                if(t<32 || t>126) return false;
+                if((t<32 && t!=9 && t!=10 && t!=13 )|| t>126) return false;
+//                if((t<32)|| t>126) return false;
             }
             return true;
         }

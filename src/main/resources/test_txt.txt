@@ -1,4 +1,4 @@
-set terminal postscript eps enhanced colour
+	set terminal postscript eps enhanced colour
 set output "pedy2De.eps"
 set autoscale
 set font "Times, 18"

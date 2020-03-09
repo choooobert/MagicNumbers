@@ -14,10 +14,6 @@ public class FileExtensionStatus {
         this.extensionFromPath="undefined";
     }
 
-    private boolean extensionFromFileEqualsextensionFromPath(){
-        return extensionFromFile == extensionFromPath;
-    }
-
     public String getExtensionString() throws Exception{
         if(!extensionFromFile.equals(extensionFromPath)) {
             StringBuilder stringBuilder = new StringBuilder("Extensions detected not equal.\nextension from file : ");

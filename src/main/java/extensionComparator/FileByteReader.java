@@ -20,7 +20,11 @@ abstract class FileByteReader  implements FileExtensionAnalyzerIf{
 
     protected byte[] readBytesFromFile(int numberOfBytes) throws IOException {
         try(DataInputStream inputStream = new DataInputStream(new FileInputStream(pathToFile));){
-            return  inputStream.readNBytes(numberOfBytes);
+            return inputStream.readNBytes(numberOfBytes);
+        }
+        catch (Error e){
+            e.printStackTrace();
+            return null;
         }
     }
 }

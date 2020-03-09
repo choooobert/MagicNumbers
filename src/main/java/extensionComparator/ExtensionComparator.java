@@ -18,6 +18,8 @@ public class ExtensionComparator {
 
 			fileExtensionAnalyzer.addExtension(new Extension("jpg",
 												Arrays.asList(new byte[]{ (byte)0xff, (byte) 0xd8, (byte) 0xff})));
+			fileExtensionAnalyzer.addExtension(new Extension("jpeg",
+					Arrays.asList(new byte[]{ (byte)0xff, (byte) 0xd8, (byte) 0xff})));
 			fileExtensionAnalyzer.addExtension(new Extension("png",
 												Arrays.asList(new byte[]{(byte)0x89, (byte)0x50, (byte)0x4E,(byte) 0x47,
 																		(byte) 0x0D,(byte) 0x0A,(byte) 0x1A,(byte) 0x0A})));
